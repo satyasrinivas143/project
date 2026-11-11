@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MySpendMate – Student Money Manager</title>
+  <meta name="description" content="A smart, all-in-one money management platform built for students. Track budgets, expenses, savings goals, and income effortlessly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <main class="promo-screen" id="promoScreen">
+    <header class="promo-header">
+      <a class="promo-brand" href="#promo-home" aria-label="MySpendMate home">🎓 MySpendMate</a>
+      <nav class="promo-nav" aria-label="Main navigation">
+        <a href="#promo-features">Features</a>
+        <a href="#promo-how-it-works">How it works</a>
+      </nav>
+      <div class="promo-header-actions">
+        <button class="auth-switch-button" type="button" data-open-auth="login">Log in</button>
+        <button class="btn-primary" type="button" data-open-auth="signup">Create account</button>
+      </div>
+    </header>
+
+    <section class="promo-hero" id="promo-home">
+      <div class="promo-hero-copy">
+        <span class="promo-eyebrow">YOUR MONEY, MORE MANAGEABLE</span>
+        <h1>Make student life<br /> <span>financially brighter.</span></h1>
+        <p>One simple place to track spending, plan a budget, and make progress toward the things you care about.</p>
+        <div class="promo-hero-actions">
+          <button class="btn-primary" type="button" data-open-auth="signup">Get started for free <span aria-hidden="true">→</span></button>
+          <button class="btn-ghost" type="button" data-open-auth="login">I already have an account</button>
+        </div>
+        <div class="promo-trust-note"><span aria-hidden="true">🔒</span> Your financial records are private to your account.</div>
+      </div>
+      <div class="promo-preview" aria-label="Interactive sample preview of MySpendMate">
+        <div class="promo-preview-top"><span>✦ Your money snapshot</span><span class="promo-live-dot">●</span></div>
+        <div class="promo-preview-tabs" role="group" aria-label="Preview app features">
+          <button type="button" class="active" aria-pressed="true" data-promo-view="overview">Overview</button>
+          <button type="button" aria-pressed="false" data-promo-view="budget">Budget</button>
+          <button type="button" aria-pressed="false" data-promo-view="goals">Goals</button>
+        </div>
+        <div class="promo-preview-balance">
+          <span id="promoBalanceLabel">Total balance</span>
+          <strong id="promoBalanceValue">₹12,480</strong>
+          <small id="promoBalanceNote">Know where you stand</small>
+        </div>
+        <div class="promo-preview-stats">
+          <div><span id="promoStatOneLabel">Monthly budget</span><strong id="promoStatOneValue">₹8,000</strong><i class="promo-progress"><i id="promoStatOneProgress"></i></i></div>
+          <div><span id="promoStatTwoLabel">Savings goal</span><strong id="promoStatTwoValue">68% there</strong><i class="promo-progress green"><i id="promoStatTwoProgress"></i></i></div>
+        </div>
+        <div class="promo-preview-activity">
+          <span id="promoActivityTitle">Recent activity</span>
+          <div><b class="promo-activity-icon" id="promoActivityIconOne">🥗</b><span id="promoActivityOne">Lunch</span><strong id="promoActivityAmountOne">− ₹180</strong></div>
+          <div><b class="promo-activity-icon income" id="promoActivityIconTwo">📚</b><span id="promoActivityTwo">Scholarship</span><strong id="promoActivityAmountTwo">+ ₹2,500</strong></div>
+        </div>
+        <p class="promo-preview-caption">Sample preview · your account starts with your data</p>
+      </div>
+    </section>
+
+    <section class="promo-features" id="promo-features">
+      <div class="promo-section-heading">
+        <span class="promo-eyebrow">EVERYTHING IN ONE PLACE</span>
+        <h2>Small steps. Smarter money habits.</h2>
+        <p>Get a clear picture of your finances and choose what to do next.</p>
+      </div>
+      <div class="promo-feature-grid">
+        <article class="promo-feature-card">
+          <span>💳</span><h3>Track spending</h3>
+          <p>Record income and expenses, then review activity by category.</p>
+          <button type="button" data-open-auth="signup">Try expense tracking →</button>
+        </article>
+        <article class="promo-feature-card">
+          <span>📋</span><h3>Plan a budget</h3>
+          <p>Set category budgets and see how your spending compares.</p>
+          <button type="button" data-open-auth="signup">Build a budget →</button>
+        </article>
+        <article class="promo-feature-card">
+          <span>🎯</span><h3>Save toward goals</h3>
+          <p>Choose a target, track your progress, and celebrate milestones.</p>
+          <button type="button" data-open-auth="signup">Create a savings goal →</button>
+        </article>
+        <article class="promo-feature-card">
+          <span>📈</span><h3>Understand your trends</h3>
+          <p>Explore reports that summarize your income, expenses, and savings.</p>
+          <button type="button" data-open-auth="signup">See your reports →</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="promo-how" id="promo-how-it-works">
+      <div>
+        <span class="promo-eyebrow">GET STARTED IN MINUTES</span>
+        <h2>A clear first step for your finances.</h2>
+        <p>Create a private account, add your own records, and let your dashboard bring them together.</p>
+      </div>
+      <ol>
+        <li><span>1</span><div><strong>Create your account</strong><p>Sign up with your name, email, and password.</p></div></li>
+        <li><span>2</span><div><strong>Add what matters to you</strong><p>Track spending, income, budgets, or a savings goal.</p></div></li>
+        <li><span>3</span><div><strong>Review your progress</strong><p>Use your dashboard and reports to understand your money.</p></div></li>
+      </ol>
+      <button class="btn-primary" type="button" data-open-auth="signup">Start managing your money <span aria-hidden="true">→</span></button>
+    </section>
+
+    <footer class="promo-footer">🎓 MySpendMate <span>Plan thoughtfully. Spend confidently.</span></footer>
+  </main>
+
+  <section class="auth-screen" id="authScreen" hidden>
+    <form class="auth-card" id="authForm">
+      <div class="auth-brand">🎓 MySpendMate</div>
+      <button class="auth-back-button" id="authBackButton" type="button">← Back to overview</button>
+      <h1 id="authTitle">Welcome back</h1>
+      <p class="auth-description" id="authDescription">Sign in to manage your finances.</p>
+      <label class="auth-field" id="authNameField" hidden>
+        <span>Full name</span>
+        <input type="text" id="authName" autocomplete="name" maxlength="80" />
+      </label>
+      <label class="auth-field">
+        <span>Email address</span>
+        <input type="email" id="authEmail" autocomplete="email" maxlength="254" required />
+      </label>
+      <label class="auth-field">
+        <span>Password</span>
+        <span class="password-input-wrap">
+          <input type="password" id="authPassword" autocomplete="current-password" minlength="8" required />
+          <button class="password-toggle" id="passwordToggle" type="button" aria-label="Show password" aria-controls="authPassword" aria-pressed="false">
+            <svg class="password-eye-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </span>
+      </label>
+      <p class="auth-message" id="authMessage" role="alert" aria-live="polite"></p>
+      <button class="btn-primary auth-submit" id="authSubmit" type="submit">Log in</button>
+      <p class="auth-switch">
+        <span id="authSwitchText">New to MySpendMate?</span>
+        <button type="button" class="auth-switch-button" id="authSwitch">Create an account</button>
+      </p>
+    </form>
+  </section>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">🎓</span>
+        <span class="logo-text">MySpendMate</span>
+      </div>
+      <button class="sidebar-toggle" id="sidebarToggle" title="Toggle sidebar">☰</button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard" id="nav-dashboard">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-page="budget" id="nav-budget">
+        <span class="nav-icon">💰</span>
+        <span class="nav-label">Budget Planner</span>
+      </a>
+      <a href="#" class="nav-item" data-page="expenses" id="nav-expenses">
+        <span class="nav-icon">💳</span>
+        <span class="nav-label">Expenses</span>
+      </a>
+      <a href="#" class="nav-item" data-page="income" id="nav-income">
+        <span class="nav-icon">📥</span>
+        <span class="nav-label">Income</span>
+      </a>
+      <a href="#" class="nav-item" data-page="savings" id="nav-savings">
+        <span class="nav-icon">🎯</span>
+        <span class="nav-label">Savings Goals</span>
+      </a>
+      <a href="#" class="nav-item" data-page="reports" id="nav-reports">
+        <span class="nav-icon">📈</span>
+        <span class="nav-label">Reports</span>
+      </a>
+      <a href="#" class="nav-item" data-page="profile" id="nav-profile">
+        <span class="nav-icon">👤</span>
+        <span class="nav-label">Profile</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="student-badge">
+        <div class="avatar" id="sidebarAvatar">SF</div>
+        <div class="student-info">
+          <span class="student-name" id="sidebarStudentName">Your profile</span>
+          <span class="student-grade" id="sidebarStudentEmail"></span>
+        </div>
+      </div>
+      <button class="btn-ghost logout-button" id="logoutBtn" type="button">Log out</button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 class="page-title" id="pageTitle">Dashboard</h1>
+        <span class="page-subtitle" id="pageSubtitle">Welcome to MySpendMate 👋</span>
+      </div>
+      <div class="topbar-right">
+        <div class="month-selector">
+          <button class="btn-icon" id="prevMonth">‹</button>
+          <span id="currentMonth">November 2026</span>
+          <button class="btn-icon" id="nextMonth">›</button>
+        </div>
+        <button class="btn-primary" id="addTransactionBtn">+ Add Transaction</button>
+        <div class="notification-bell" title="Notifications">
+          🔔
+          <span class="badge">3</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Pages -->
+    <div class="page active" id="page-dashboard">
+      <!-- Summary Cards -->
+      <section class="cards-grid">
+        <div class="card card-balance glow-purple">
+          <div class="card-icon">💵</div>
+          <div class="card-info">
+            <span class="card-label">Total Balance</span>
+            <span class="card-value" id="balanceValue">₹0</span>
+            <span class="card-change positive" id="balanceSummary">No transactions yet</span>
+          </div>
+          <div class="card-sparkline">
+            <canvas id="sparkBalance"></canvas>
+          </div>
+        </div>
+        <div class="card card-budget glow-blue">
+          <div class="card-icon">📋</div>
+          <div class="card-info">
+            <span class="card-label">Monthly Budget</span>
+            <span class="card-value" id="budgetValue">₹0</span>
+            <span class="card-change neutral" id="budgetRemaining">₹0 remaining</span>
+          </div>
+          <div class="mini-progress">
+            <div class="mini-bar" id="budgetProgress" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="card card-expense glow-red">
+          <div class="card-icon">🛒</div>
+          <div class="card-info">
+            <span class="card-label">Total Spent</span>
+            <span class="card-value" id="spentValue">₹0</span>
+            <span class="card-change negative" id="spentSummary">Set a budget to track spending</span>
+          </div>
+          <div class="card-sparkline">
+            <canvas id="sparkExpense"></canvas>
+          </div>
+        </div>
+        <div class="card card-savings glow-green">
+          <div class="card-icon">🏦</div>
+          <div class="card-info">
+            <span class="card-label">Total Savings</span>
+            <span class="card-value" id="savingsValue">₹0</span>
+            <span class="card-change positive" id="savingsSummary">0 savings goals</span>
+          </div>
+          <div class="card-sparkline">
+            <canvas id="sparkSavings"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Charts Row -->
+      <section class="charts-row">
+        <div class="chart-card wide">
+          <div class="chart-header">
+            <h3>Monthly Spending Trend</h3>
+            <div class="chart-tabs">
+              <button class="tab active" data-chart="weekly">Weekly</button>
+              <button class="tab" data-chart="monthly">Monthly</button>
+            </div>
+          </div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="spendingTrendChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>Expense Breakdown</h3>
+          </div>
+          <div class="chart-canvas-wrapper short">
+            <canvas id="expenseDonutChart"></canvas>
+          </div>
+          <div class="donut-legend" id="donutLegend"></div>
+        </div>
+      </section>
+
+      <!-- Recent Transactions -->
+      <section class="transactions-section">
+        <div class="section-header">
+          <h3>Recent Transactions</h3>
+          <button class="btn-ghost" id="viewAllTransactions">View All →</button>
+        </div>
+        <div class="transactions-list" id="recentTransactions"></div>
+      </section>
+    </div>
+
+    <!-- Budget Planner Page -->
+    <div class="page" id="page-budget">
+      <section class="budget-overview">
+        <div class="budget-hero">
+          <div class="budget-circle-wrap">
+            <div class="chart-canvas-wrapper gauge">
+              <canvas id="budgetGaugeChart"></canvas>
+            </div>
+            <div class="gauge-center">
+              <span class="gauge-pct" id="budgetPct">57%</span>
+              <span class="gauge-label">Used</span>
+            </div>
+          </div>
+          <div class="budget-stats">
+            <div class="bstat"><span>Total Budget</span><strong id="bStatTotal">₹15,000</strong></div>
+            <div class="bstat"><span>Spent this month</span><strong id="bStatSpent">₹8,680</strong></div>
+            <div class="bstat"><span>Remaining</span><strong id="bStatRemaining" class="positive">₹6,320</strong></div>
+          </div>
+        </div>
+      </section>
+      <div class="budget-alert" id="budgetAlert" role="status" hidden>
+        <span class="budget-alert-icon" aria-hidden="true">⚠️</span>
+        <div><strong id="budgetAlertTitle">Over budget</strong><span id="budgetAlertMessage"></span></div>
+      </div>
+      <section class="budget-categories">
+        <div class="section-header">
+          <h3>Budget by Category</h3>
+          <span class="budget-period" id="budgetMonthLabel"></span>
+          <button class="btn-primary" type="button" id="addCategoryBtn">+ Add Category</button>
+        </div>
+        <div class="budget-cats-grid" id="budgetCatsGrid"></div>
+      </section>
+    </div>
+
+    <!-- Expenses Page -->
+    <div class="page" id="page-expenses">
+      <section class="expense-filters">
+        <input type="text" class="search-input" placeholder="🔍 Search expenses..." id="expenseSearch" />
+        <select class="filter-select" id="expenseCatFilter">
+          <option value="all">All Categories</option>
+          <option value="food">Food</option>
+          <option value="transport">Transport</option>
+          <option value="education">Education</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="health">Health</option>
+          <option value="shopping">Shopping</option>
+          <option value="utilities">Utilities</option>
+        </select>
+        <select class="filter-select" id="expenseSortFilter">
+          <option value="date-desc">Newest First</option>
+          <option value="date-asc">Oldest First</option>
+          <option value="amt-desc">Highest Amount</option>
+          <option value="amt-asc">Lowest Amount</option>
+        </select>
+      </section>
+      <section class="expenses-table-section">
+        <table class="data-table" id="expensesTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Amount</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="expensesTableBody"></tbody>
+        </table>
+      </section>
+    </div>
+
+    <!-- Income Page -->
+    <div class="page" id="page-income">
+      <section class="income-summary-cards">
+        <div class="card glow-green">
+          <div class="card-icon">📥</div>
+          <div class="card-info">
+            <span class="card-label">Recorded Income</span>
+            <span class="card-value" id="incomeTotalValue">₹0</span>
+            <span class="card-change positive">From your income records</span>
+          </div>
+        </div>
+        <div class="card glow-blue">
+          <div class="card-icon">🎓</div>
+          <div class="card-info">
+            <span class="card-label">Income Sources</span>
+            <span class="card-value" id="incomeSourceCount">0</span>
+            <span class="card-change neutral">Saved income sources</span>
+          </div>
+        </div>
+        <div class="card glow-purple">
+          <div class="card-icon">💼</div>
+          <div class="card-info">
+            <span class="card-label">Expected Monthly</span>
+            <span class="card-value" id="monthlyIncomeValue">₹0</span>
+            <span class="card-change neutral">From monthly sources</span>
+          </div>
+        </div>
+        <div class="card glow-red">
+          <div class="card-icon">🏠</div>
+          <div class="card-info">
+            <span class="card-label">Expenses Recorded</span>
+            <span class="card-value" id="incomePageExpenseValue">₹0</span>
+            <span class="card-change neutral">Tracked transactions</span>
+          </div>
+        </div>
+      </section>
+      <section class="income-sources-section">
+        <div class="section-header">
+          <h3>Income Sources</h3>
+          <div class="section-header-actions">
+            <button class="btn-ghost" id="addIncomeSourceBtn" type="button">+ Add Source</button>
+            <button class="btn-primary" id="addIncomeBtn" type="button">+ Add Income</button>
+          </div>
+        </div>
+        <div class="income-sources-list" id="incomeSourcesList"></div>
+      </section>
+      <section class="chart-card" style="margin-top:1.5rem;">
+        <div class="chart-header"><h3>Income vs Expenses (6 Months)</h3></div>
+        <div class="chart-canvas-wrapper">
+          <canvas id="incomeExpenseChart"></canvas>
+        </div>
+      </section>
+    </div>
+
+    <!-- Savings Goals Page -->
+    <div class="page" id="page-savings">
+      <div class="section-header">
+        <h3>My Savings Goals</h3>
+        <button class="btn-primary" id="addGoalBtn">+ Add Goal</button>
+      </div>
+      <section class="savings-overview" aria-label="Savings goals summary">
+        <div class="savings-overview-icon">🎯</div>
+        <div>
+          <span>Total saved toward goals</span>
+          <strong id="savingsGoalsTotal">₹0</strong>
+        </div>
+        <div>
+          <span>Goals in progress</span>
+          <strong id="savingsGoalsCount">0</strong>
+        </div>
+      </section>
+      <div class="savings-goals-grid" id="savingsGoalsGrid"></div>
+    </div>
+
+    <!-- Reports Page -->
+    <div class="page" id="page-reports">
+      <section class="reports-grid">
+        <div class="chart-card wide">
+          <div class="chart-header"><h3>Yearly Financial Overview</h3></div>
+          <div class="chart-canvas-wrapper tall">
+            <canvas id="yearlyChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header"><h3>Savings Progress</h3></div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="savingsProgressChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header"><h3>Top Spending Categories</h3></div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="topCatsChart"></canvas>
+          </div>
+        </div>
+        <div class="report-summary-card wide">
+          <h3>Monthly Summary</h3>
+          <div class="report-stats-grid" id="reportStats"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Profile Page -->
+    <div class="page" id="page-profile">
+      <section class="profile-section">
+        <div class="profile-card">
+          <div class="profile-avatar-large" id="profileAvatar">SF</div>
+          <div class="profile-details">
+            <label class="profile-label" for="profileName">Full name</label>
+            <input type="text" class="profile-input" placeholder="Full name" id="profileName" maxlength="80" required />
+            <label class="profile-label" for="profileEmail">Email address</label>
+            <input type="email" class="profile-input" id="profileEmail" readonly />
+            <label class="profile-label" for="profileDegree">Course and year</label>
+            <input type="text" class="profile-input" placeholder="Course and year" id="profileDegree" maxlength="120" />
+            <label class="profile-label" for="profileCollege">College</label>
+            <input type="text" class="profile-input" placeholder="College" id="profileCollege" maxlength="120" />
+          </div>
+        </div>
+        <div class="settings-card">
+          <h3>Preferences</h3>
+          <div class="setting-row">
+            <span>Currency</span>
+            <select class="filter-select" id="currencySelect">
+              <option value="INR">₹ Indian Rupee (INR)</option>
+              <option value="USD">$ US Dollar (USD)</option>
+              <option value="EUR">€ Euro (EUR)</option>
+              <option value="GBP">£ British Pound (GBP)</option>
+            </select>
+          </div>
+          <div class="setting-row">
+            <div>
+              <span>Budget Reset Date</span>
+              <small class="setting-hint">The selected day repeats each month.</small>
+            </div>
+            <input class="filter-select" id="budgetResetDay" type="date" aria-label="Choose budget reset date" required />
+          </div>
+          <div class="setting-row">
+            <span>Budget Alerts</span>
+            <label class="toggle-switch">
+              <input type="checkbox" checked id="budgetAlerts" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="setting-row">
+            <span>Weekly Report Email</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="weeklyReport" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="setting-row">
+            <span>Savings Reminders</span>
+            <label class="toggle-switch">
+              <input type="checkbox" checked id="savingsReminders" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <button class="btn-primary" style="margin-top:1rem; width:100%;" id="saveProfileBtn" type="button">Save Changes</button>
+          <button class="btn-ghost profile-logout-button" id="profileLogoutBtn" type="button">Log out</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modal: Add Transaction -->
+  <div class="modal-overlay" id="transactionModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Transaction</h3>
+        <button class="modal-close" id="closeModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-tabs">
+          <button class="tab active" id="tabExpense" data-type="expense">💳 Expense</button>
+          <button class="tab" id="tabIncome" data-type="income">📥 Income</button>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" class="form-control" id="txDesc" placeholder="e.g. Canteen lunch" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Amount (₹)</label>
+            <input type="number" class="form-control" id="txAmount" placeholder="0.00" min="0" />
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" class="form-control" id="txDate" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select class="form-control" id="txCategory">
+            <option value="food">🍕 Food</option>
+            <option value="transport">🚌 Transport</option>
+            <option value="education">📚 Education</option>
+            <option value="entertainment">🎮 Entertainment</option>
+            <option value="health">💊 Health</option>
+            <option value="shopping">🛍️ Shopping</option>
+            <option value="utilities">⚡ Utilities</option>
+            <option value="other">📦 Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Note (optional)</label>
+          <textarea class="form-control" id="txNote" placeholder="Add a note..." rows="2"></textarea>
+        </div>
+        <button class="btn-primary full-width" id="saveTxBtn">Save Transaction</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Income -->
+  <div class="modal-overlay" id="incomeModal">
+    <form class="modal" id="incomeForm" aria-labelledby="incomeModalTitle">
+      <div class="modal-header">
+        <h3 id="incomeModalTitle">Record Income</h3>
+        <button class="modal-close" type="button" id="closeIncomeModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="goal-form-intro">Add income to your transaction history.</p>
+        <div class="form-group">
+          <label for="incomeDescription">Description</label>
+          <input class="form-control" id="incomeDescription" name="description" type="text" maxlength="120" placeholder="e.g. Scholarship" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="incomeAmount">Amount (₹)</label>
+            <input class="form-control" id="incomeAmount" name="amount" type="number" min="0.01" step="0.01" placeholder="0.00" required />
+          </div>
+          <div class="form-group">
+            <label for="incomeDate">Date</label>
+            <input class="form-control" id="incomeDate" name="date" type="date" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="incomeNote">Note <span class="optional-label">Optional</span></label>
+          <textarea class="form-control" id="incomeNote" name="note" maxlength="500" placeholder="Add a note..." rows="2"></textarea>
+        </div>
+        <button class="btn-primary full-width" type="submit">Save Income</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal: Add Income Source -->
+  <div class="modal-overlay" id="incomeSourceModal">
+    <form class="modal" id="incomeSourceForm" aria-labelledby="incomeSourceModalTitle">
+      <div class="modal-header">
+        <h3 id="incomeSourceModalTitle">Add Income Source</h3>
+        <button class="modal-close" type="button" id="closeIncomeSourceModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="goal-form-intro">Save a recurring or occasional source for your income overview.</p>
+        <div class="form-group">
+          <label for="incomeSourceName">Source name</label>
+          <input class="form-control" id="incomeSourceName" name="name" type="text" maxlength="80" placeholder="e.g. Part-time job" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="incomeSourceAmount">Expected amount (₹)</label>
+            <input class="form-control" id="incomeSourceAmount" name="amount" type="number" min="0" step="1" value="0" required />
+          </div>
+          <div class="form-group">
+            <label for="incomeSourceFrequency">Frequency</label>
+            <input class="form-control" id="incomeSourceFrequency" name="frequency" type="text" maxlength="64" value="Monthly" required />
+          </div>
+        </div>
+        <button class="btn-primary full-width" type="submit">Save Source</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal: Add Budget Category -->
+  <div class="modal-overlay" id="budgetCategoryModal">
+    <form class="modal" id="budgetCategoryForm" aria-labelledby="budgetCategoryTitle">
+      <div class="modal-header">
+        <h3 id="budgetCategoryTitle">Add a budget category</h3>
+        <button class="modal-close" type="button" id="closeBudgetCategoryModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="goal-form-intro">Choose a category and set its monthly spending limit.</p>
+        <div class="form-group">
+          <label for="budgetCategoryType">Category</label>
+          <select class="form-control" id="budgetCategoryType" name="category" required>
+            <option value="food">🍕 Food</option>
+            <option value="transport">🚌 Transport</option>
+            <option value="education">📚 Education</option>
+            <option value="entertainment">🎮 Entertainment</option>
+            <option value="health">💊 Health</option>
+            <option value="shopping">🛍️ Shopping</option>
+            <option value="utilities">⚡ Utilities</option>
+            <option value="other">📦 Other (name it)</option>
+          </select>
+        </div>
+        <div class="form-group" id="customBudgetCategoryField" hidden>
+          <label for="customBudgetCategoryName">Your category name</label>
+          <input class="form-control" id="customBudgetCategoryName" name="customName" type="text" maxlength="50" placeholder="e.g. Pet care" />
+        </div>
+        <div class="form-group">
+          <label for="budgetCategoryAmount">Monthly budget (₹)</label>
+          <input class="form-control" id="budgetCategoryAmount" name="budget" type="number" min="0.01" step="0.01" placeholder="e.g. 2000" required />
+        </div>
+        <button class="btn-primary full-width" type="submit">Save budget category</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal: Add Savings Goal -->
+  <div class="modal-overlay" id="goalModal">
+    <form class="modal" id="goalForm" aria-labelledby="goalModalTitle">
+      <div class="modal-header">
+        <h3 id="goalModalTitle">Create a savings goal</h3>
+        <button class="modal-close" type="button" data-close-modal="goalModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="goal-form-intro">Give your next goal a name, a target, and a date to aim for.</p>
+        <div class="form-group">
+          <label for="goalName">Goal name</label>
+          <input class="form-control" id="goalName" name="name" type="text" maxlength="80" placeholder="e.g. New laptop" required />
+        </div>
+        <div class="form-group">
+          <label for="goalDescription">What are you saving for? <span class="optional-label">Optional</span></label>
+          <input class="form-control" id="goalDescription" name="description" type="text" maxlength="160" placeholder="Add a little detail" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="goalTarget">Target amount (₹)</label>
+            <input class="form-control" id="goalTarget" name="target" type="number" min="0.01" step="0.01" placeholder="10000" required />
+          </div>
+          <div class="form-group">
+            <label for="goalSaved">Already saved (₹)</label>
+            <input class="form-control" id="goalSaved" name="saved" type="number" min="0" step="0.01" value="0" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="goalDeadline">Target date <span class="optional-label">Optional</span></label>
+            <input class="form-control" id="goalDeadline" name="deadline" type="date" />
+          </div>
+          <div class="form-group">
+            <label for="goalIcon">Choose an icon</label>
+            <select class="form-control" id="goalIcon" name="icon">
+              <option value="🎯">🎯 Goal</option>
+              <option value="💻">💻 Laptop</option>
+              <option value="📱">📱 Phone</option>
+              <option value="✈️">✈️ Travel</option>
+              <option value="🎓">🎓 Education</option>
+              <option value="🏠">🏠 Home</option>
+              <option value="🎮">🎮 Fun</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-primary full-width" type="submit">Create goal</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal: Add to Savings Goal -->
+  <div class="modal-overlay" id="goalContributionModal">
+    <form class="modal" id="goalContributionForm" aria-labelledby="goalContributionTitle">
+      <div class="modal-header">
+        <h3 id="goalContributionTitle">Add to your goal</h3>
+        <button class="modal-close" type="button" data-close-modal="goalContributionModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="goal-form-intro" id="goalContributionDescription"></p>
+        <input id="contributionGoalId" name="goalId" type="hidden" />
+        <div class="form-group">
+          <label for="goalContributionAmount">Amount to add (₹)</label>
+          <input class="form-control" id="goalContributionAmount" name="amount" type="number" min="0.01" step="0.01" placeholder="500" required />
+        </div>
+        <button class="btn-primary full-width" type="submit">Add savings</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

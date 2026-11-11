@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MySpendMate – Project Abstract</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #edf2f7;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 30px 18px 50px;
+    }
+
+    .print-bar {
+      position: fixed;
+      top: 18px;
+      right: 22px;
+      z-index: 10;
+    }
+
+    .btn-print {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 18px rgba(37, 99, 235, 0.25);
+    }
+
+    .page {
+      width: 100%;
+      max-width: 900px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 16px 48px rgba(15, 23, 42, 0.08);
+      padding: 55px 60px 42px;
+      position: relative;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 7px;
+      background: linear-gradient(90deg, #1d4ed8, #2563eb, #7c3aed, #10b981);
+    }
+
+    .college-header {
+      text-align: center;
+      border-bottom: 2px double #1d4ed8;
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+    }
+
+    .college-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .college-sub {
+      margin-top: 5px;
+      font-size: 0.76rem;
+      color: #475569;
+      letter-spacing: 0.3px;
+    }
+
+    .dept-name {
+      margin-top: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #1d4ed8;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .title-block {
+      text-align: center;
+      margin: 18px 0 22px;
+    }
+
+    .doc-label {
+      display: inline-block;
+      background: #1d4ed8;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 3px;
+      margin-bottom: 18px;
+    }
+
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .project-title span { color: #2563eb; }
+
+    .project-subtitle {
+      font-size: 0.92rem;
+      color: #64748b;
+      font-style: italic;
+    }
+
+    .section {
+      margin-top: 22px;
+    }
+
+    .section-title {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.7px;
+      color: #2563eb;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1d4ed8, #60a5fa);
+      display: inline-block;
+    }
+
+    .section-body {
+      font-size: 0.93rem;
+      line-height: 1.9;
+      color: #334155;
+      text-align: justify;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 18px;
+    }
+
+    .obj-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .obj-list li {
+      display: flex;
+      gap: 10px;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #334155;
+    }
+
+    .obj-list li::before {
+      content: "▸";
+      color: #2563eb;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .pill {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1d4ed8;
+      font-size: 0.72rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .pill.green {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #047857;
+    }
+
+    .pill.purple {
+      background: #f5f3ff;
+      border-color: #ddd6fe;
+      color: #6d28d9;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.82rem;
+    }
+
+    th {
+      background: #1d4ed8;
+      color: white;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    td {
+      padding: 11px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .info-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 10px;
+      text-align: center;
+    }
+
+    .info-card-label {
+      display: block;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+
+    .info-card-value {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .sign-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 38px;
+    }
+
+    .sign-box {
+      text-align: center;
+    }
+
+    .sign-line {
+      border-top: 1.5px solid #64748b;
+      margin-top: 22px;
+    }
+
+    .sign-label {
+      margin-top: 8px;
+      font-size: 0.76rem;
+      color: #64748b;
+    }
+
+    .sign-name {
+      margin-top: 6px;
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 0.8rem;
+    }
+
+    .page-footer {
+      margin-top: 34px;
+      padding-top: 14px;
+      border-top: 1px solid #e2e8f0;
+      text-align: center;
+      font-size: 0.7rem;
+      color: #94a3b8;
+      letter-spacing: 0.4px;
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .print-bar { display: none; }
+      .page {
+        max-width: 100%;
+        box-shadow: none;
+        border: none;
+        padding: 35px 42px 30px;
+      }
+    }
+
+    @page {
+      size: A4;
+      margin: 0.7cm;
+    }
+  </style>
+</head>
+<body>
+  <div class="print-bar">
+    <button class="btn-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  </div>
+
+  <div class="page">
+    <div class="college-header">
+      <div class="college-name">Department of Computer Science & Engineering</div>
+      <div class="college-sub">Affiliated to a Recognised University | AICTE Approved</div>
+      <div class="dept-name">Database Management Systems – Mini Project</div>
+    </div>
+
+    <div class="title-block">
+      <div class="doc-label">Project Abstract</div>
+      <div class="project-title"><span>My</span>SpendMate</div>
+      <div class="project-subtitle">Secure Student Money Management System</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Overall Abstract</div>
+      <p class="section-body">
+        <strong>MySpendMate</strong> is a full-stack web application that helps students organize personal finances through income and expense tracking, category-based budgeting, savings goals, and visual reports. Because financial records are personal, the application provides account registration, email-and-password login, profile management, and logout. Passwords are stored as salted scrypt hashes, and an HTTP-only session cookie is used to maintain a signed-in session.
+      </p>
+      <p class="section-body" style="margin-top:10px;">
+        The frontend is built with HTML, CSS, and JavaScript, while a Node.js and Express backend provides a JSON API and stores accounts, profiles, and financial records in SQLite. Database queries scope each user's records to their account, and browser-side cached data is kept under account-specific keys. The dashboard and reports summarize recorded transactions and goals with interactive charts, helping students understand their cash flow and make informed budgeting decisions. New installations start with an empty database; old shared demo data is not imported.
+      </p>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-title">Project Objectives</div>
+        <ul class="obj-list">
+          <li>Track student income and expenses in one application.</li>
+          <li>Create and update budgets according to different spending categories.</li>
+          <li>Monitor saving progress for academic and personal goals.</li>
+          <li>Generate clear visual reports for better financial analysis.</li>
+          <li>Allow students to register, log in, manage profile details, and log out.</li>
+          <li>Keep financial records and browser caches separated by account.</li>
+          <li>Demonstrate database-backed record management through a responsive web interface.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Keywords</div>
+        <div class="tech-pills">
+          <span class="pill">Student Finance</span>
+          <span class="pill">Account Authentication</span>
+          <span class="pill">Budget Planning</span>
+          <span class="pill">Expense Tracker</span>
+          <span class="pill green">Savings Goal</span>
+          <span class="pill green">Income Management</span>
+          <span class="pill purple">Reports</span>
+          <span class="pill purple">Account Data Isolation</span>
+          <span class="pill">SQLite Database</span>
+          <span class="pill">Web Application</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Module-wise Overview</div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:70px;">Module</th>
+            <th>Purpose</th>
+            <th>Functionality</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Dashboard Module</strong></td>
+            <td>Summarizes the signed-in user's recorded income, expenses, budgets, and savings goals with charts and recent activity.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>Budget Planner Module</strong></td>
+            <td>Creates category-based budget limits and compares planned amounts with recorded spending.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>Expense Module</strong></td>
+            <td>Records, searches, sorts, and deletes the user's expense transactions.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Income Module</strong></td>
+            <td>Maintains income transactions and user-defined sources such as scholarships, employment, and family support.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Savings Goal Module</strong></td>
+            <td>Creates savings goals, sets target amounts and deadlines, and tracks contributions and progress.</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>Reports & Analytics Module</strong></td>
+            <td>Visualizes account-specific transaction history, income, expenses, savings, and spending categories.</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>Profile & Settings Module</strong></td>
+            <td>Registers and authenticates accounts, manages profile details, maintains login/logout sessions, and restricts financial data to its owner.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-title">System Scope</div>
+        <p class="section-body">
+          The system covers account creation and authentication, profile updates, and the per-user management of income, expenses, budgets, savings goals, and reports. The Express API validates account and profile input, stores password hashes rather than plaintext passwords, and protects application endpoints with session authentication. SQLite stores user and finance records; each finance query is scoped to the authenticated account. New databases are initialized empty rather than populated with shared demo records. Browser storage provides an account-specific cache, while the backend database is the shared persistence layer.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Expected Outcome</div>
+        <p class="section-body">
+          MySpendMate provides a working, account-based platform where students can create an account, sign in, manage profile information, track their own financial records, and log out. Its dashboard and reports present summaries derived from the user's saved data, while SQLite persistence supports returning sessions and account-level separation. The project demonstrates practical DBMS concepts—including relational storage, validation, querying, and ownership-based data access—in a student finance application.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Project Information</div>
+      <div class="info-cards">
+        <div class="info-card">
+          <span class="info-card-label">Project Name</span>
+          <span class="info-card-value">MySpendMate</span>
+        </div>
+        <div class="info-card">
+          <span class="info-card-label">Type</span>
+          <span class="info-card-value">DBMS Mini Project</span>
+        </div>
+        <div class="info-card">
+          <span class="info-card-label">Domain</span>
+          <span class="info-card-value">Finance / Web App</span>
+        </div>
+        <div class="info-card">
+          <span class="info-card-label">Technology</span>
+          <span class="info-card-value">HTML, CSS, JS, Node.js</span>
+        </div>
+        <div class="info-card">
+          <span class="info-card-label">Platform</span>
+          <span class="info-card-value">Client-server web app</span>
+        </div>
+        <div class="info-card">
+          <span class="info-card-label">Database</span>
+          <span class="info-card-value">SQLite</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sign-row">
+      <div class="sign-box">
+        <div class="sign-line"></div>
+        <div class="sign-label">Student Name</div>
+        <div class="sign-name">[Your Name]</div>
+      </div>
+      <div class="sign-box">
+        <div class="sign-line"></div>
+        <div class="sign-label">Guide / Faculty</div>
+        <div class="sign-name">[Guide Name]</div>
+      </div>
+      <div class="sign-box">
+        <div class="sign-line"></div>
+        <div class="sign-label">HOD</div>
+        <div class="sign-name">[HOD Name]</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      MySpendMate | DBMS Mini Project | Department of Computer Science | Academic Year 2026–27
+    </div>
+  </div>
+</body>
+</html>
